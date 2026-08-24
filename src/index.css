@@ -1,0 +1,535 @@
+/* ==========================================================================
+   Ekka — teaser site
+   Palette is taken from the logo: deep forest green on pale mint.
+   Mobile-first; every media query below is a min-width step up from phone.
+   ========================================================================== */
+
+:root {
+  /* Fixed brand values, straight off the logo. The mark renders in these
+     everywhere so it always matches the master artwork. Never re-theme these.
+     The pale disc is the whole reason this works on a dark ground — it reads
+     as a headlight against the near-black. */
+  --logo-ink: #0e4d3a;
+  --logo-disc: #e3f0ea;
+
+  /* Dark theme, always on. Not pure black: the ground is tinted with the
+     brand green so the mark and the type sit in the same family as it. */
+  --bg: #07130f;          /* page */
+  --surface: #0f231d;     /* inputs, raised cards */
+  --mint-soft: rgba(127, 215, 180, 0.09);
+  --line: rgba(127, 215, 180, 0.2);
+
+  /* #0E4D3A is unreadable as type on this ground, so text and accents lift to
+     a light mint-green. The logo itself keeps the deep green — it has the pale
+     disc behind it to carry the contrast. */
+  --ink: #e8f2ee;
+  --ink-muted: #93a8a0;
+  --brand: #7fd7b4;
+  --brand-hover: #96e1c4;
+  --on-brand: #05231a;
+
+  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --gutter: 1.5rem;
+  --measure: 60rem;
+
+  /* Native controls, scrollbars, and autofill follow the page. */
+  color-scheme: dark;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+:where(a, button, input):focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+/* ----------------------------------------------------------- Wordmark --- */
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  color: var(--brand);
+}
+
+.wordmark--stacked {
+  flex-direction: column;
+  gap: 0.6em;
+}
+
+.wordmark__text {
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+/* -------------------------------------------------------- Site header --- */
+
+.site-header {
+  padding: 1.75rem var(--gutter);
+  text-align: center;
+}
+
+.site-header--bordered {
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header__name {
+  display: inline-block;
+  color: var(--brand);
+  font-size: clamp(1.5rem, 5.5vw, 2.125rem);
+  font-weight: 700;
+  /* Wide tracking is what makes it read as a masthead rather than a heading.
+     The matching indent cancels the trailing letter-space so it stays
+     optically centred. */
+  letter-spacing: 0.24em;
+  text-indent: 0.24em;
+  line-height: 1;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------- Hero --- */
+
+.hero {
+  position: relative;
+  padding: 2.5rem var(--gutter) 4.5rem;
+  overflow: hidden;
+}
+
+/* Soft mint wash behind the mark, so the hero has depth without an image. */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -14rem;
+  left: 50%;
+  width: min(46rem, 130vw);
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, var(--mint-soft) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  max-width: var(--measure);
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* The wheel rolls in from beyond the left edge of the screen. Full-bleed past
+   the hero's max-width so the run-up starts off-screen; safe because body
+   clips horizontal overflow. */
+.hero__stage {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding-bottom: 0.5rem;
+}
+
+.hero__mark {
+  display: block;
+  filter: drop-shadow(0 14px 34px rgba(127, 215, 180, 0.18));
+}
+
+/* One unbroken line. It fades out at both ends rather than stopping hard, so
+   the wheel rolls in from nothing instead of off the end of a bar. */
+.hero__road {
+  position: relative;
+  width: min(34rem, 88vw);
+  height: 5px;
+  margin-top: 0.85rem;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--brand) 18%,
+    var(--brand) 82%,
+    transparent 100%
+  );
+}
+
+.hero__tagline {
+  margin-top: 2.5rem;
+  color: var(--brand);
+  font-size: clamp(2.75rem, 12vw, 5.5rem);
+  font-weight: 700;
+}
+
+.hero__tagline-break {
+  display: block;
+}
+
+/* The launch line is the second-loudest thing in the hero, under the tagline
+   and well above body copy — it is the news, so it gets display scale. */
+.hero__launch {
+  margin-top: 1.35rem;
+  color: var(--ink);
+  font-size: clamp(1.5rem, 6.5vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.hero__launch-city {
+  color: var(--brand);
+  white-space: nowrap;
+}
+
+/* ----------------------------------------------------------- Waitlist --- */
+
+.waitlist {
+  margin-top: 2.25rem;
+}
+
+.waitlist__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  max-width: 30rem;
+  margin: 0 auto;
+}
+
+.waitlist__input {
+  width: 100%;
+  padding: 0.95rem 1.15rem;
+  border: 1.5px solid var(--line);
+  border-radius: 0.85rem;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.waitlist__input::placeholder {
+  color: var(--ink-muted);
+}
+
+.waitlist__input:hover {
+  border-color: var(--brand);
+}
+
+.waitlist__button {
+  padding: 0.95rem 1.5rem;
+  border: none;
+  border-radius: 0.85rem;
+  background: var(--brand);
+  color: var(--on-brand);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.waitlist__button:hover {
+  background: var(--brand-hover);
+}
+
+.waitlist__button:disabled {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+.waitlist__done {
+  color: var(--brand);
+  font-weight: 500;
+}
+
+.waitlist__error {
+  margin-top: 0.6rem;
+  color: #ff9086;
+  font-size: 0.9rem;
+}
+
+
+/* -------------------------------------------------------------- About --- */
+
+.about {
+  padding: 3.5rem var(--gutter) 4rem;
+  border-top: 1px solid var(--line);
+}
+
+.about__inner {
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+.about__eyebrow {
+  color: var(--brand);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.about__lede {
+  max-width: 22ch;
+  margin-top: 1rem;
+  font-size: clamp(1.6rem, 7vw, 2.75rem);
+  font-weight: 600;
+}
+
+.about__points {
+  display: grid;
+  gap: 2rem;
+  margin: 2.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about__point {
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--brand);
+}
+
+.about__point-title {
+  color: var(--brand);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.about__point-body {
+  margin-top: 0.5rem;
+  max-width: 42ch;
+  color: var(--ink-muted);
+}
+
+/* ------------------------------------------------- Document / privacy --- */
+
+.doc {
+  width: 100%;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 3rem var(--gutter) 4rem;
+}
+
+.doc__title {
+  color: var(--brand);
+  font-size: clamp(2rem, 9vw, 3rem);
+  font-weight: 700;
+}
+
+.doc__meta {
+  margin-top: 0.6rem;
+  color: var(--ink-muted);
+  font-size: 0.875rem;
+}
+
+.doc__lede {
+  margin-top: 2rem;
+  font-size: 1.125rem;
+  color: var(--ink);
+}
+
+.doc__section {
+  margin-top: 2.5rem;
+}
+
+.doc__section h2 {
+  color: var(--brand);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.doc__section p,
+.doc__section ul {
+  margin-top: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.doc__section ul {
+  padding-left: 1.15rem;
+}
+
+.doc__section li + li {
+  margin-top: 0.5rem;
+}
+
+.doc__section strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.doc__section a {
+  color: var(--brand);
+  text-underline-offset: 0.2em;
+}
+
+.doc__contact {
+  padding: 1rem 1.15rem;
+  border-left: 2px solid var(--brand);
+  background: var(--mint-soft);
+  border-radius: 0 0.5rem 0.5rem 0;
+  line-height: 1.9;
+}
+
+/* Unfilled draft placeholders. Loud on purpose — they must not reach
+   production unnoticed. See the note at the top of Privacy.jsx. */
+.fill {
+  padding: 0.1em 0.4em;
+  border-radius: 0.3em;
+  background: #ffe9a8;
+  color: #5a4300;
+  font-size: 0.9em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ------------------------------------------------------------- Footer --- */
+
+.footer {
+  margin-top: auto;
+  padding: 1.75rem var(--gutter);
+  border-top: 1px solid var(--line);
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  max-width: var(--measure);
+  margin: 0 auto;
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+}
+
+.footer__wordmark {
+  text-decoration: none;
+}
+
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.25rem;
+}
+
+.footer__links a {
+  text-decoration: none;
+}
+
+.footer__links a:hover {
+  color: var(--brand);
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------- Breakpoints --- */
+
+@media (min-width: 40rem) {
+  :root {
+    --gutter: 2.5rem;
+  }
+
+  .hero {
+    padding-top: 3.5rem;
+  }
+
+  .hero__tagline-break {
+    display: inline;
+  }
+
+  .waitlist__form {
+    flex-direction: row;
+    max-width: 34rem;
+  }
+
+  .waitlist__input {
+    flex: 1;
+  }
+
+  .waitlist__button {
+    flex-shrink: 0;
+  }
+
+  .about__points {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.25rem;
+  }
+
+  .footer__inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 64rem) {
+  .hero {
+    padding-top: 4.5rem;
+  }
+
+  .about {
+    padding-block: 6rem;
+  }
+
+  .doc {
+    padding-top: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

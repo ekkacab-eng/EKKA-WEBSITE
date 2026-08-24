@@ -1,0 +1,106 @@
+import LegalDoc, { Section, Fill } from './LegalDoc'
+
+/**
+ * BEFORE LAUNCH: a working draft, not cleared legal copy. Fill every <Fill>
+ * placeholder and have counsel review it.
+ *
+ * This page exists because the home page makes forward-looking product claims
+ * — capped surge, a driver-friendly commission, no hidden fees. Those are
+ * intentions for an unlaunched service. If the home page copy changes, the
+ * "What we say about the service" section below has to change with it.
+ */
+
+const UPDATED = '23 August 2026'
+
+export default function Disclaimer() {
+  return (
+    <LegalDoc
+      title="Disclaimer"
+      updated={UPDATED}
+      lede="Ekka has not launched. Everything this site says about how the service
+        will work describes what we intend to build, not a service you can use
+        today or a promise about what the finished product will be."
+    >
+      <Section title="No service is operating yet">
+        <p>
+          This is a pre-launch page. There is no Ekka app, no rides, and no
+          driver network in operation. Nothing here is an offer to provide
+          transport services, and no booking can be made through this site.
+        </p>
+      </Section>
+
+      <Section title="What we say about the service">
+        <p>
+          The home page describes capped surge pricing, a lower flat commission
+          for drivers, and fares with no hidden additions. Those are our design
+          goals for the product. They are{' '}
+          <strong>forward-looking statements, not guarantees</strong>. Specific
+          numbers — surge ceilings, commission rates, fare structures — are not
+          yet set, and the final terms at launch may differ from what is
+          described here.
+        </p>
+      </Section>
+
+      <Section title="Launch timing and location">
+        <p>
+          We intend to launch in Hyderabad first. We cannot promise a date, and
+          we cannot promise the launch will happen at all. Plans may change,
+          slip, or be abandoned for commercial, operational, or regulatory
+          reasons.
+        </p>
+      </Section>
+
+      <Section title="Regulatory approvals">
+        <p>
+          Operating a ride-hailing service in India requires licences and
+          approvals, including aggregator licensing under the applicable Motor
+          Vehicles aggregator rules. Ekka&rsquo;s launch is subject to obtaining and
+          maintaining these. Current status:{' '}
+          <Fill>REGULATORY / LICENSING STATUS</Fill>.
+        </p>
+      </Section>
+
+      <Section title="Accuracy of this site">
+        <p>
+          We try to keep the information here accurate and current, but we
+          provide it as it is, without warranty of any kind. We may change any
+          of it without notice, and we are not obliged to update statements that
+          later become inaccurate.
+        </p>
+      </Section>
+
+      <Section title="Not advice, and not an investment offer">
+        <p>
+          Nothing on this site is legal, financial, or professional advice.
+          Nothing on it is an offer or invitation to invest in Ekka or to buy
+          any security.
+        </p>
+      </Section>
+
+      <Section title="Relying on this site">
+        <p>
+          Please do not make decisions in reliance on anything here — for
+          example, giving up other transport arrangements, or making business
+          plans around Ekka&rsquo;s launch. To the extent Indian law allows, we accept
+          no liability for loss arising from such reliance. Our full liability
+          position is in the{' '}
+          <a href="/terms.html">terms &amp; conditions</a>.
+        </p>
+      </Section>
+
+      <Section title="External links">
+        <p>
+          We are not responsible for the content, accuracy, or practices of any
+          third-party site we link to.
+        </p>
+      </Section>
+
+      <Section title="Contact">
+        <p>
+          Questions about anything on this page:{' '}
+          <a href="mailto:legal@ekkaride.com">legal@ekkaride.com</a>.
+        </p>
+      </Section>
+    </LegalDoc>
+  )
+}
