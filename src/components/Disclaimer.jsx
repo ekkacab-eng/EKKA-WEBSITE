@@ -32,13 +32,22 @@ export default function Disclaimer() {
 
       <Section title="What we say about the service">
         <p>
-          The home page describes capped surge pricing, a lower flat commission
-          for drivers, and fares with no hidden additions. Those are our design
-          goals for the product. They are{' '}
-          <strong>forward-looking statements, not guarantees</strong>. Specific
-          numbers — surge ceilings, commission rates, fare structures — are not
-          yet set, and the final terms at launch may differ from what is
-          described here.
+          The home page says we intend to offer the best fare we can, to cap
+          surge pricing at a visible ceiling, to charge drivers a low
+          subscription and a low per-trip commission, and to add nothing to a
+          fare after it is quoted. Those are our design goals for the product.
+          They are{' '}
+          <strong>forward-looking statements, not guarantees</strong>. No
+          specific figure is set: surge ceilings, subscription rates,
+          commission percentages, and fare structures are all still being
+          worked out, and the final terms at launch may differ from what is
+          described there.
+        </p>
+        <p>
+          In particular, &ldquo;the best fare we can offer&rdquo; describes how we intend
+          to price our own service. It is not a comparison against any other
+          operator, and it is not a promise that an Ekka ride will be cheaper
+          than any given alternative on any given day.
         </p>
       </Section>
 

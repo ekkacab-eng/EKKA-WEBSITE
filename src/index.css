@@ -323,10 +323,18 @@ a {
 }
 
 .about__lede {
-  max-width: 22ch;
+  max-width: 26ch;
   margin-top: 1rem;
   font-size: clamp(1.6rem, 7vw, 2.75rem);
   font-weight: 600;
+}
+
+/* Sets up the four claims below. */
+.about__intro {
+  max-width: 54ch;
+  margin-top: 1.5rem;
+  font-size: clamp(1.05rem, 4vw, 1.25rem);
+  color: var(--ink);
 }
 
 .about__points {
@@ -335,6 +343,16 @@ a {
   margin: 2.75rem 0 0;
   padding: 0;
   list-style: none;
+}
+
+/* Pre-launch honesty, set quieter than the claims it qualifies. */
+.about__outro {
+  max-width: 60ch;
+  margin-top: 2.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-muted);
+  font-size: 0.95rem;
 }
 
 .about__point {
@@ -504,8 +522,8 @@ a {
   }
 
   .about__points {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.25rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 2.25rem;
   }
 
   .footer__inner {
