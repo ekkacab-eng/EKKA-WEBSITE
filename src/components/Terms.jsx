@@ -1,13 +1,14 @@
-import LegalDoc, { Section, Fill } from './LegalDoc'
+import LegalDoc, { Section, Detail } from './LegalDoc'
+import { LEGAL } from '../legal-details'
 
 /**
- * BEFORE LAUNCH: a working draft, not cleared legal copy. Fill every <Fill>
- * placeholder and have counsel review it. These terms cover *this website*
+ * BEFORE LAUNCH: a working draft, not cleared legal copy. Fill every blank in
+ * src/legal-details.js and have counsel review it. These terms cover *this website*
  * only — the app will need its own rider and driver terms, which are a
  * materially different document.
  */
 
-const UPDATED = '23 August 2026'
+const UPDATED = '26 August 2026'
 
 export default function Terms() {
   return (
@@ -30,7 +31,7 @@ export default function Terms() {
       <Section title="What this site is">
         <p>
           A pre-launch page for Ekka, operated by{' '}
-          <Fill>REGISTERED LEGAL ENTITY NAME</Fill> (&ldquo;Ekka&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). It
+          <Detail value={LEGAL.entityName} label="REGISTERED LEGAL ENTITY NAME" /> (&ldquo;we&rdquo;, &ldquo;us&rdquo;). It
           exists to describe what we intend to build and to let you register
           interest. <strong>No ride-hailing service is currently operating</strong>,
           and nothing on this site is an offer to provide transport.
@@ -127,7 +128,7 @@ export default function Terms() {
       <Section title="Governing law">
         <p>
           These terms are governed by the laws of India. The courts at{' '}
-          <Fill>JURISDICTION CITY</Fill> have exclusive jurisdiction over any
+          <Detail value={LEGAL.jurisdictionCity} label="JURISDICTION CITY" /> have exclusive jurisdiction over any
           dispute arising from them.
         </p>
       </Section>
@@ -135,8 +136,8 @@ export default function Terms() {
       <Section title="Contact">
         <p>
           Questions about these terms:{' '}
-          <a href="mailto:legal@ekkaride.com">legal@ekkaride.com</a>. Anything
-          else: <a href="mailto:hello@ekkaride.com">hello@ekkaride.com</a>.
+          <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a>. Anything
+          else: <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a>.
         </p>
       </Section>
     </LegalDoc>

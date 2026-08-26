@@ -38,3 +38,12 @@ export function Section({ title, children }) {
 export function Fill({ children }) {
   return <mark className="fill">[{children}]</mark>
 }
+
+/**
+ * A company detail from `legal-details.js`. Prints the real value once it is
+ * set, and the loud placeholder chip until then — so a missing detail is
+ * visible on the page rather than an empty gap in a sentence.
+ */
+export function Detail({ value, label }) {
+  return value ? <>{value}</> : <Fill>{label}</Fill>
+}

@@ -1,13 +1,14 @@
-import LegalDoc, { Section, Fill } from './LegalDoc'
+import LegalDoc, { Section, Detail } from './LegalDoc'
+import { LEGAL } from '../legal-details'
 
 /**
- * BEFORE LAUNCH: a working draft, not cleared legal copy. Fill every <Fill>
- * placeholder and have counsel review the document against the DPDP Act 2023.
+ * BEFORE LAUNCH: a working draft, not cleared legal copy. Fill every blank in
+ * src/legal-details.js and have counsel review the document against the DPDP Act 2023.
  * Revisit it the moment the app starts collecting ride data, location, or
  * payment details, none of which this covers.
  */
 
-const UPDATED = '23 August 2026'
+const UPDATED = '26 August 2026'
 
 export default function Privacy() {
   return (
@@ -20,9 +21,8 @@ export default function Privacy() {
     >
       <Section title="Who we are">
         <p>
-          This site is operated by <Fill>REGISTERED LEGAL ENTITY NAME</Fill>,
-          registered at <Fill>REGISTERED OFFICE ADDRESS</Fill>, India (&ldquo;Ekka&rdquo;,
-          &ldquo;we&rdquo;, &ldquo;us&rdquo;). We are the Data Fiduciary for the personal data
+          This site is operated by <Detail value={LEGAL.entityName} label="REGISTERED LEGAL ENTITY NAME" />,
+          registered at <Detail value={LEGAL.registeredAddress} label="REGISTERED OFFICE ADDRESS" />, India (&ldquo;we&rdquo;, &ldquo;us&rdquo;). We are the Data Fiduciary for the personal data
           described here under India&rsquo;s Digital Personal Data Protection Act,
           2023.
         </p>
@@ -64,7 +64,7 @@ export default function Privacy() {
           Submitting the form is your consent to be contacted about the launch.
           You can withdraw it at any time, for any reason, and it is as easy to
           withdraw as it was to give: email{' '}
-          <a href="mailto:privacy@ekkaride.com">privacy@ekkaride.com</a> and ask
+          <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a> and ask
           to be removed. Every message we send will also carry an unsubscribe
           link. Withdrawing consent stops future contact and triggers deletion as
           described below; it does not affect messages already sent.
@@ -77,8 +77,14 @@ export default function Privacy() {
           waitlist work — our hosting provider, and the email or SMS service that
           delivers launch announcements. They act as Data Processors on our
           instructions, may use the data only to provide that service, and are
-          bound by contract to protect it. Our current providers are{' '}
-          <Fill>HOSTING PROVIDER</Fill> and <Fill>EMAIL / SMS PROVIDER</Fill>.
+          bound by contract to protect it.
+        </p>
+        <p>
+          This site is hosted by{' '}
+          <Detail value={LEGAL.hostingProvider} label="HOSTING PROVIDER" />. The
+          email or SMS provider that will deliver launch announcements is{' '}
+          <Detail value={LEGAL.messagingProvider} label="EMAIL / SMS PROVIDER" />;
+          we will name it here before we send you anything.
         </p>
         <p>
           Beyond that, we disclose personal data only where the law requires it —
@@ -122,22 +128,22 @@ export default function Privacy() {
           </li>
         </ul>
         <p>
-          Write to <a href="mailto:privacy@ekkaride.com">privacy@ekkaride.com</a>{' '}
+          Write to <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a>{' '}
           and we will respond within 30 days. There is no charge.
         </p>
       </Section>
 
       <Section title="Grievance redressal">
         <p>
-          If something about our handling of your data is not right, our
-          Grievance Officer is the person to tell:
+          If something about our handling of your data is not right, write to
+          our Grievance Officer:
         </p>
         <p className="doc__contact">
-          <Fill>GRIEVANCE OFFICER NAME</Fill>
+          Grievance Officer, <Detail value={LEGAL.entityName} label="REGISTERED LEGAL ENTITY NAME" />
           <br />
-          <a href="mailto:grievance@ekkaride.com">grievance@ekkaride.com</a>
+          <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a>
           <br />
-          <Fill>REGISTERED OFFICE ADDRESS</Fill>, India
+          <Detail value={LEGAL.registeredAddress} label="REGISTERED OFFICE ADDRESS" />, India
         </p>
         <p>
           We aim to acknowledge within 48 hours and resolve within 30 days. If
@@ -160,7 +166,7 @@ export default function Privacy() {
         <p>
           This waitlist is not intended for anyone under 18. We do not knowingly
           collect data from children. If you believe a child has signed up, tell
-          us at <a href="mailto:privacy@ekkaride.com">privacy@ekkaride.com</a> and
+          us at <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a> and
           we will delete the entry.
         </p>
       </Section>
@@ -178,8 +184,8 @@ export default function Privacy() {
       <Section title="Contact">
         <p>
           Questions about any of this:{' '}
-          <a href="mailto:privacy@ekkaride.com">privacy@ekkaride.com</a>. Anything
-          else: <a href="mailto:hello@ekkaride.com">hello@ekkaride.com</a>.
+          <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a>. Anything
+          else: <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a>.
         </p>
       </Section>
     </LegalDoc>

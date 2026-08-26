@@ -1,8 +1,9 @@
-import LegalDoc, { Section, Fill } from './LegalDoc'
+import LegalDoc, { Section, Detail } from './LegalDoc'
+import { LEGAL } from '../legal-details'
 
 /**
- * BEFORE LAUNCH: a working draft, not cleared legal copy. Fill every <Fill>
- * placeholder and have counsel review it.
+ * BEFORE LAUNCH: a working draft, not cleared legal copy. Fill every blank in
+ * src/legal-details.js and have counsel review it.
  *
  * This page exists because the home page makes forward-looking product claims
  * — capped surge, a driver-friendly commission, no hidden fees. Those are
@@ -10,7 +11,7 @@ import LegalDoc, { Section, Fill } from './LegalDoc'
  * "What we say about the service" section below has to change with it.
  */
 
-const UPDATED = '23 August 2026'
+const UPDATED = '26 August 2026'
 
 export default function Disclaimer() {
   return (
@@ -55,8 +56,8 @@ export default function Disclaimer() {
           Operating a ride-hailing service in India requires licences and
           approvals, including aggregator licensing under the applicable Motor
           Vehicles aggregator rules. Ekka&rsquo;s launch is subject to obtaining and
-          maintaining these. Current status:{' '}
-          <Fill>REGULATORY / LICENSING STATUS</Fill>.
+          maintaining these. Currently{' '}
+          <Detail value={LEGAL.regulatoryStatus} label="REGULATORY / LICENSING STATUS" />.
         </p>
       </Section>
 
@@ -98,7 +99,7 @@ export default function Disclaimer() {
       <Section title="Contact">
         <p>
           Questions about anything on this page:{' '}
-          <a href="mailto:legal@ekkaride.com">legal@ekkaride.com</a>.
+          <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a>.
         </p>
       </Section>
     </LegalDoc>

@@ -1,4 +1,5 @@
 import EkkaWordmark from './EkkaWordmark'
+import { LEGAL } from '../legal-details'
 
 export default function Footer() {
   return (
@@ -12,7 +13,7 @@ export default function Footer() {
           <a href="/privacy.html">Privacy policy</a>
           <a href="/terms.html">Terms &amp; conditions</a>
           <a href="/disclaimer.html">Disclaimer</a>
-          <a href="mailto:hello@ekkaride.com">hello@ekkaride.com</a>
+          <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a>
         </nav>
       </div>
     </footer>
