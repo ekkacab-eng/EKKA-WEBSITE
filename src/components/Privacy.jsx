@@ -81,7 +81,9 @@ export default function Privacy() {
         </p>
         <p>
           This site is hosted by{' '}
-          <Detail value={LEGAL.hostingProvider} label="HOSTING PROVIDER" />. The
+          <Detail value={LEGAL.hostingProvider} label="HOSTING PROVIDER" />, and
+          your contact detail is stored in a database run by{' '}
+          <Detail value={LEGAL.databaseProvider} label="DATABASE PROVIDER" />. The
           email or SMS provider that will deliver launch announcements is{' '}
           <Detail value={LEGAL.messagingProvider} label="EMAIL / SMS PROVIDER" />;
           we will name it here before we send you anything.

@@ -30,6 +30,12 @@ export const LEGAL = {
   /** Who serves the site. */
   hostingProvider: 'Vercel',
 
+  /**
+   * Where the waitlist itself is stored. This one holds personal data, so it
+   * is a Data Processor and has to be named in the privacy policy.
+   */
+  databaseProvider: 'Supabase',
+
   /** Who delivers launch email/SMS. Not chosen yet — stated plainly as such. */
   messagingProvider: 'not yet appointed',
 

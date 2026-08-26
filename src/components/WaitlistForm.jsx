@@ -1,7 +1,12 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
-const WAITLIST_ENDPOINT = 'https://api.ekkaride.com/waitlist'
+// Supabase REST, called directly with fetch — no client library, so the
+// bundle stays as small as it was. The anon key is public by design; what
+// protects the data is the Row Level Security policy in
+// supabase/waitlist.sql, which grants INSERT and nothing else.
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 // Indian mobile numbers: 10 digits starting 6-9, with an optional +91 / 91 / 0.
@@ -40,21 +45,41 @@ export default function WaitlistForm() {
     setError(null)
     setStatus('sending')
 
-    const payload = { contact: result.contact, type: result.type, source: 'teaser-hero' }
+    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+      // Misconfigured deploy. Never pretend the signup was stored.
+      console.error('[ekka] VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY are not set')
+      setStatus('idle')
+      setError('Signups are temporarily unavailable. Please try again later.')
+      return
+    }
 
     try {
-      const response = await fetch(WAITLIST_ENDPOINT, {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          Prefer: 'return=minimal',
+        },
+        body: JSON.stringify({
+          contact: result.contact,
+          contact_type: result.type,
+          source: 'teaser-hero',
+        }),
       })
-      if (!response.ok) throw new Error(`Waitlist responded ${response.status}`)
+
+      // 409 is the unique index rejecting a repeat signup. They are already on
+      // the list, which is exactly what they wanted — treat it as success.
+      if (!response.ok && response.status !== 409) {
+        throw new Error(`Waitlist responded ${response.status}`)
+      }
     } catch (err) {
-      // No backend yet — the endpoint is a placeholder. Until it is live we log
-      // the signup and still confirm to the visitor.
-      // TODO: remove this fallback and surface a real error once the API ships.
-      console.warn('[ekka] waitlist POST failed, logging locally instead:', err)
-      console.log('[ekka] waitlist signup:', payload)
+      // The row was not stored, so do not tell anyone they are on the list.
+      console.error('[ekka] waitlist signup failed:', err)
+      setStatus('idle')
+      setError('Something went wrong saving that. Please try again.')
+      return
     }
 
     setStatus('done')
