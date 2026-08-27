@@ -175,9 +175,11 @@ export default function Privacy() {
 
       <Section title="Changes to this policy">
         <p>
-          When Ekka launches, the app will have a fuller privacy policy covering
-          rides, location, and payments. This page will be updated then, and the
-          date at the top will change. If a change materially affects data you
+          This page covers the waitlist on this website only. The Ekka app has
+          its own, fuller policy covering rides, location, and payments —{' '}
+          <a href="/app-privacy">read the app privacy policy</a>. This page will
+          be updated as the service launches, and the date at the top will
+          change. If a change materially affects data you
           have already given us, we will tell you directly rather than quietly
           editing this page.
         </p>
